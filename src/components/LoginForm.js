@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react';
 
-export const LoginPage = () => {
+export const LoginForm = () => {
   
   // const {handleSubmit, register, errors} = useForm();
 
