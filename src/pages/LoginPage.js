@@ -1,5 +1,5 @@
 import React, { useReducer, useState, createContext } from 'react';
-import { UsersCollection } from '../components/LoginForm';
+import { UsersCollection } from '../components/UsersList';
 import { userInitialState, userReducer } from '../reducers/UserReducer';
 
 export const LoginPage = () => {
@@ -21,37 +21,40 @@ export const LoginPage = () => {
       username: user.username,
       password: user.password
     }
-    console.log(user)
     dispatch({type: 'ADD_USER', payload: newUser})
+    setUser({username: '', password: ''})
   }
 
   return(
-    <>
+    <>      
+      <form style={{"display": "flex", "flex-direction": "column", "justify-content": "space-between"}} onSubmit={(e) => e.preventDefault()}>
+        <h2>Login Component</h2>
+        {/* manages own state **/}
+        <small>( needs form validation )</small>
+
+        <label>username</label>
+        <input
+          name='username'
+          type='username'
+          value={user.username}
+          onChange={handleChanges}
+        />
+
+        <label>password</label>
+        <input
+          name='password'
+          type='password'
+          value={user.password}
+          onChange={handleChanges}
+        />
+
+        <button onClick={() => addUser(user)} type="submit" >Go</button>
+
+        <p>{JSON.stringify(user)}</p>
+      </form>
       <UseContext.Provider value={state.users}>
         <UsersCollection users={state.users} />
       </UseContext.Provider>
-      
-        <form onSubmit={(e) => e.preventDefault()}>
-          <h3>Login Component</h3>
-          <label>username</label>
-          <input
-            name='username'
-            type='username'
-            value={user.username}
-            onChange={handleChanges}
-          />
-
-          <label>password</label>
-          <input
-            name='password'
-            type='password'
-            value={user.password}
-            onChange={handleChanges}
-          />
-
-          <button onClick={() => addUser(user)} type="submit" >Go</button>
-          {JSON.stringify(user)}
-        </form>
     </>
   )
 }
