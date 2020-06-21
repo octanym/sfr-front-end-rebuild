@@ -1,19 +1,16 @@
 import React from 'react';
-import { useForm } from 'react';
+// import { TextField } from '@material-ui/core';
+// import { Form, Formik } from 'formik'
 
-export const LoginForm = () => {
+export const UsersCollection = ({ newUser, users, add, userInput }) => {
   
   // const {handleSubmit, register, errors} = useForm();
-
   return(
-    <form>
-      <label>username</label>
-      <input/>
-
-      <label>password</label>
-      <input/>
-
-    </form>
+    <div>
+      {users.map((user) => (
+        <div>User: {user.username}</div>
+      ))}
+    </div>
   )
 
 }
