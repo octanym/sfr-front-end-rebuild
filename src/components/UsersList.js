@@ -2,9 +2,7 @@ import React from 'react';
 // import { TextField } from '@material-ui/core';
 // import { Form, Formik } from 'formik'
 
-export const UsersCollection = ({ newUser, users, add, userInput }) => {
-  
-  // const {handleSubmit, register, errors} = useForm();
+export const UsersCollection = ({ users }) => {
   return(
     <div>
       {users.map((user) => (
@@ -12,7 +10,6 @@ export const UsersCollection = ({ newUser, users, add, userInput }) => {
       ))}
     </div>
   )
-
 }
 
 

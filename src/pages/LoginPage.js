@@ -1,8 +1,11 @@
 import React, { useReducer, useState, createContext } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { UsersCollection } from '../components/UsersList';
 import { userInitialState, userReducer } from '../reducers/UserReducer';
 
 export const LoginPage = () => {
+
+  const history = useHistory();
 
   const [user, setUser] = useState({username: '', password: ''})
 
@@ -10,6 +13,12 @@ export const LoginPage = () => {
  
   const UseContext = createContext();
 
+
+  const onSubmit = () => {
+    /* function makes a call and gets response data ( token )**/
+    /* dispatch an action to store token payload in reducer**/
+    /* pass token as props from reducer set token local storage **/
+  }
   const handleChanges = (e) => {
     setUser({ ...user,
       [e.target.name]: e.target.value
@@ -52,9 +61,9 @@ export const LoginPage = () => {
 
         <p>{JSON.stringify(user)}</p>
       </form>
-      <UseContext.Provider value={state.users}>
+      {/* <UseContext.Provider value={state.users}>
+      </UseContext.Provider> */}
         <UsersCollection users={state.users} />
-      </UseContext.Provider>
     </>
   )
 }
