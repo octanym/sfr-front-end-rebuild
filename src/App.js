@@ -1,6 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import Dashboard from './pages/dashboard';
+import LogIn from './components/log-in';
+import Register from './components/register';
 
 function App() {
   return (
