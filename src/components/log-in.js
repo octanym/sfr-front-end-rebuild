@@ -16,7 +16,10 @@ const LogIn = () => {
     axiosWithAuth()
       .post('/auth/login', credentials)
       .then( res => {
-        window.localStorage.setItem('token', res.data.payload)
+        //set the value of the returned token to a key of 'token' in local storage
+        window.localStorage.setItem('token', res.data.token)
+          // console.log(res.data.token)
+        history.push()
       })
       .catch( err => console.log( 'there was an issue retrieving data:', err ))
   //stop default behavior that the click event triggers on the form element
@@ -29,8 +32,9 @@ const LogIn = () => {
       //spread any occurring value changes of event targets into corresponding props in the object state
       [e.target.name]: e.target.value
     })
-    console.log(credentials)
   }
+  
+  console.log(credentials)
 
   return (
     <>
@@ -38,9 +42,9 @@ const LogIn = () => {
       <form onSubmit={handleSubmit} >
 
         <input
-          value={credentials.username}
+          value={credentials.user_name}
           type="text"
-          name="username"
+          name="user_name"
           placeholder="username"
           onChange={handleChanges}
         />
