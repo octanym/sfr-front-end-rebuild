@@ -21,15 +21,30 @@ const CreateRecipe = () => {
 
   const [inProp, setInProp] = useState(false);
 
+  const [ingIn, setIngIn] = useState(false);
+
+  const [entered, setEntered] = useState(false)
+
   const handleChange = (e) => {
     setRecipe({...recipe,
       [e.target.name]: e.target.value
     })
   }
 
+  const changeEnter = () => {
+    setEntered(true)
+  }
+
+  const changeIng = () => {
+    setIngIn(true)
+  }
+
+  console.log(entered)
+  console.log(ingIn)
+
   return (
     <div>
-      <Transition in={inProp} timeout={duration}>
+      <Transition in={inProp} timeout={duration} onEnter={changeEnter} onExited={changeIng}>
         {state => (
           <div style={{
             ...defaultStyle,
