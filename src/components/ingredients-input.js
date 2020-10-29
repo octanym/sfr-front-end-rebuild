@@ -15,19 +15,21 @@ const IngredientsInput = (props) => {
 
   return (
     <>
-      <input
+      <TextField
+        id="filled-basic"
+        label="ingredient"
+        variant="filled"
         value={props.ingredient}
-        type="text"
         name="ingredient"
-        placeholder="ingredient"
         onChange={props.handleChanges}
       />
 
-      <input
+      <TextField
+        id="filled-basic"
+        label="quantity"
+        variant="filled"
         value={props.quantity}
-        type="text"
         name="quantity"
-        placeholder="quantity"
         onChange={props.handleChanges}
       />
 

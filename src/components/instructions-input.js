@@ -1,29 +1,33 @@
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
 
 const InstructionsInput = (props) => {
   return (
     <>
-      <input
+      <TextField
+        id="filled-basic"
+        label="direction"
+        variant="filled"
         value={props.direction}
-        type="text"
         name="direction"
-        placeholder="direction"
         onChange={props.handleChanges}
       />
 
-      <input
+      <TextField
+        id="filled-basic"
+        label="time"
+        variant="filled"
         value={props.time}
-        type="text"
         name="time"
-        placeholder="time"
         onChange={props.handleChanges}
       />
 
-      <input
+      <TextField
+        id="filled-basic"
+        label="step"
+        variant="filled"
         value={props.step}
-        type="text"
         name="step"
-        placeholder="step"
         onChange={props.handleChanges}
       />
       {/* <button onClick={() => props.setChecked({...props.checked, instruction: !props.checked.instruction})}>Done</button> */}

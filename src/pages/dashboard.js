@@ -1,6 +1,6 @@
 import React from 'react';
 import RecipeCollection from '../components/recipes-collection';
-import CreateRecipe from '../components/create-recipe';
+import CreateRecipePage from './create-recipe-page';
 
 const Dashboard  = () => {
   return (
