@@ -2,6 +2,7 @@ import React from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -16,28 +17,30 @@ const RecipeInput = (props) => {
 
   return (
     <>
-        <input
+        <TextField 
+          id="filled-basic"
+          label="title"
+          variant="filled"
           className={classes.input}
           value={props.title}
-          type="text"
           name="title"
-          placeholder="recipe title"
           onChange={props.handleChanges}
         />
 
-        <input
+        <TextField 
+          id="filled-basic"
+          label="source"
+          variant="filled"
           className={classes.input}
           value={props.source}
-          type="text"
           name="source"
-          placeholder="recipe source"
           onChange={props.handleChanges}
         />
 
-        <FormControlLabel
+        {/* <FormControlLabel
           control={<Button checked={props.checked.recipe} onClick={() => props.setChecked({...props.checked, recipe: !props.checked.recipe})} />}
           label="Done"
-        />
+        /> */}
 
         {/* when imported to creat-recipes.js */}
         {/* <button onClick={() => props.setChecked({...props.checked, recipe: !props.checked.recipe, ingredient: !props.checked.ingredient})}>Done</button> */}

@@ -26,7 +26,7 @@ const InstructionsInput = (props) => {
         placeholder="step"
         onChange={props.handleChanges}
       />
-      <button onClick={() => props.setChecked({...props.checked, instruction: !props.checked.instruction})}>Done</button>
+      {/* <button onClick={() => props.setChecked({...props.checked, instruction: !props.checked.instruction})}>Done</button> */}
 
       {/* <button onClick={() => props.setInProp({...props.inProp, instruction: !props.inProp.instruction})}>Done</button> */}
     </>
