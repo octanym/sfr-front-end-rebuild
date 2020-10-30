@@ -9,11 +9,11 @@ import CreateRecipePage from './pages/create-recipe-page';
 function App() {
   return (
     <div className="App">
-      <CreateRecipePage />
-      {/* <Switch>
+      {/* <CreateRecipePage /> */}
+      <Switch>
         <Route exact path="/" component={LogIn} />
         <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-      </Switch> */}
+      </Switch>
     </div>
   );
 }

@@ -10,6 +10,9 @@ const Dashboard  = () => {
         <li>RecipeCollection</li>
         <li>CreateRecipe</li>
       </ul>
+      <div>
+        <CreateRecipePage />
+      </div>
     </>
   )
 }
