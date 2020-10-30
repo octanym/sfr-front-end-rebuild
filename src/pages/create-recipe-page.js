@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axios-auth';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -52,6 +52,8 @@ export default function CreateRecipePage() {
 
   const [checked, setChecked] = useState({recipe: true, ingredient: false, instruction: false})
 
+  const [post, setPost] = useState({})
+
   const [recipeFields, setRecipeFields] = useState({
     title: "",
     source: "",
@@ -61,9 +63,7 @@ export default function CreateRecipePage() {
     time: "",
     step: ""
   })
-
-  const [post, setPost] = useState({})
-
+  
   const handleChanges = (e) => {
     setRecipeFields({...recipeFields,
       [e.target.name]: e.target.value
@@ -72,34 +72,26 @@ export default function CreateRecipePage() {
     setPost({...post,
       [e.target.name] : e.target.value
     })
-
   }
-
-  // const selectedFields = (e) => {
-  //   console.log(e.target.name)
-  //   setPost({...post,
-  //     [e.target.name] : e.target.value
-  //   })
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submission successfully launched", post)
-    setPost({...post,
-      [e.target.name]: ""
-    })
-
-    // (Object.entries(post)).map( (entry) => {
-    //   setRecipeFields({...recipeFields,
-    //     [entry[0]]: ""
-    //   })
+    // setPost({...post,
+    //   [e.target.name]: ""
     // })
+    const pathValue = checked.recipe ? 'recipes' : (checked.ingredient ? 'ingredients' : 'instructions')
+    axiosWithAuth()
+      .post(`/${pathValue}`, post)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log('res is not coming back the way we expected')
+      })
 
     setPost({})
-    
   }
-
-
 
   return (
     <div className={classes.root}>
@@ -108,7 +100,8 @@ export default function CreateRecipePage() {
           <Paper elevation={6} className={classes.paper}>
             <form onSubmit={handleSubmit} className={classes.form}>
               <RecipeInput className={classes.recipe} checked={checked} setChecked={setChecked} handleChanges={handleChanges} title={recipeFields.title} source={recipeFields.source}/>
-              <Button type="submit" variant="contained" color="secondary" onClick={() => setChecked({...checked, recipe: !checked.recipe, ingredient: !checked.ingredient})}>Add Ingredients</Button>
+              {/* Recipe does not need to have its state cleared because title and source are single values*/}
+              <Button type="submit" variant="contained" color="secondary" onClick={() => setChecked({...checked, recipe: !checked.recipe, ingredient: !checked.ingredient})}>Next</Button>
             </form>
           </Paper>
         </Slide>
@@ -116,8 +109,8 @@ export default function CreateRecipePage() {
           <Paper elevation={6} className={classes.paper}>
             <form onSubmit={handleSubmit} className={classes.form}>
               <IngredientsInput className={classes.recipe} checked={checked} setChecked={setChecked} handleChanges={handleChanges} ingredient={recipeFields.ingredient} quantity={recipeFields.quantity}/>
-              <Button type="submit" variant="contained" color="secondary" onClick={() => setRecipeFields({...recipeFields, ingredient: " ", quantity: " "})} >Add Another</Button>
-              <Button variant="contained" color="secondary" onClick={() => setChecked({...checked, ingredient: !checked.ingredient, instruction: !checked.instruction})}>Ready to Add Instructions?</Button>
+              <Button type="submit" variant="contained" color="secondary" onClick={() => setRecipeFields({...recipeFields, ingredient: " ", quantity: " "})} >Add It</Button>
+              <Button variant="contained" color="secondary" onClick={() => setChecked({...checked, ingredient: !checked.ingredient, instruction: !checked.instruction})}>Next</Button>
             </form>
           </Paper>
         </Slide>
@@ -125,7 +118,7 @@ export default function CreateRecipePage() {
           <Paper elevation={6} className={classes.paper}>
             <form onSubmit={handleSubmit} className={classes.form}>
               <InstructionsInput className={classes.recipe} checked={checked} setChecked={setChecked} handleChanges={handleChanges} direction={recipeFields.direction} time={recipeFields.time} step={recipeFields.step}/>
-              <Button type="submit" variant="contained" color="secondary" onClick={() => setRecipeFields({...recipeFields, direction: " ", time: " ", step: " "})} >Add Another</Button>
+              <Button type="submit" variant="contained" color="secondary" onClick={() => setRecipeFields({...recipeFields, direction: " ", time: " ", step: " "})} >Add It</Button>
               <Button type="submit" variant="contained" color="secondary" onClick={() => setChecked({...checked, instruction: !checked.instruction})}>Done</Button>
             </form>
           </Paper>
