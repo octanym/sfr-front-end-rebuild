@@ -63,9 +63,9 @@ export default function CreateRecipePage() {
     source: "",
     ingredient: "",
     quantity: "",
-    direction: "",
+    step: "",
     time: "",
-    step: ""
+    directions: ""
   })
   
   const handleChanges = (e) => {
@@ -87,22 +87,18 @@ export default function CreateRecipePage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // try checked.ingredient && checked.instruction ? 'instruction' : 'ingredient'
-    const pathValue = checked.recipe ? 'recipes' : (checked.ingredient ? 'ingredients' : 'instructions')
+    // const pathValue = checked.recipe ? 'recipes' : (checked.ingredient ? 'ingredients' : 'instructions')
+    const path = !checked.ingredient && !checked.instruction ? 'recipes' : (!checked.recipe && !checked.ingredient ? 'instructions' : 'ingredients')
     // setPost({...post,
     //   [e.target.name]: ""
     // })
-    if (!post.title) {
-        if (!post.ingredient) {
-          setChecked({...checked, ingredient: !checked.ingredient, instruction: !checked.instruction})
-        } else if (!post.instruction) {
-          //at this point checked.ingredient is still true
-          setChecked({...checked, instruction: !checked.instruction})
-        }
-    } else {
-        setChecked({...checked, recipe: !checked.recipe, ingredient: !checked.ingredient});
+
+    //the submit and transition functions are bundled together for the recipe title and source inputs
+    if (post.title) {
+      setChecked({...checked, recipe: !checked.recipe, ingredient: !checked.ingredient});
     } 
     axiosWithAuth()
-    .post(`/${pathValue}`, post)
+    .post(`/${path}`, post)
     .then(res => {
       console.log(res)
     })
@@ -111,6 +107,7 @@ export default function CreateRecipePage() {
     })
     
     console.log("submission successfully launched", post, e)
+    //clear the object in state for post
     setPost({})
   }
 
@@ -131,16 +128,16 @@ export default function CreateRecipePage() {
             <form onSubmit={handleSubmit} className={classes.form}>
               <IngredientsInput className={classes.recipe} checked={checked} setChecked={setChecked} handleChanges={handleChanges} ingredient={recipeFields.ingredient} quantity={recipeFields.quantity}/>
               <Button type="submit" variant="contained" color="secondary" onClick={() => setRecipeFields({...recipeFields, ingredient: " ", quantity: " "})} >Add It</Button>
-              <Button variant="contained" color="secondary" >Next</Button>
+              <Button onClick={() => setChecked({...checked, ingredient: !checked.ingredient, instruction: !checked.instruction})} variant="contained" color="secondary" >Next</Button>
             </form>
           </Paper>
         </Slide>
         <Slide direction="up" in={checked.instruction} mountOnEnter unmountOnExit>
           <Paper elevation={6} className={classes.paper}>
             <form onSubmit={handleSubmit} className={classes.form}>
-              <InstructionsInput className={classes.recipe} checked={checked} setChecked={setChecked} handleChanges={handleChanges} direction={recipeFields.direction} time={recipeFields.time} step={recipeFields.step}/>
-              <Button type="submit" variant="contained" color="secondary" onClick={() => setRecipeFields({...recipeFields, direction: " ", time: " ", step: " "})} >Add It</Button>
-              <Button type="submit" variant="contained" color="secondary" >Done</Button>
+              <InstructionsInput className={classes.recipe} checked={checked} setChecked={setChecked} handleChanges={handleChanges} directions={recipeFields.directions} time={recipeFields.time} step={recipeFields.step}/>
+              <Button type="submit" variant="contained" color="secondary" onClick={() => setRecipeFields({...recipeFields, step: " ", time: " ", directions: " "})} >Add It</Button>
+              <Button onClick={() => (setChecked({...checked, instruction: !checked.instruction}))} variant="contained" color="secondary" >Done</Button>
             </form>
           </Paper>
         </Slide>

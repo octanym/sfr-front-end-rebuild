@@ -4,12 +4,13 @@ import TextField from '@material-ui/core/TextField';
 const InstructionsInput = (props) => {
   return (
     <>
+
       <TextField
         id="filled-basic"
-        label="direction"
+        label="step"
         variant="filled"
-        value={props.direction}
-        name="direction"
+        value={props.step}
+        name="step"
         onChange={props.handleChanges}
       />
 
@@ -24,12 +25,13 @@ const InstructionsInput = (props) => {
 
       <TextField
         id="filled-basic"
-        label="step"
+        label="directions"
         variant="filled"
-        value={props.step}
-        name="step"
+        value={props.directions}
+        name="directions"
         onChange={props.handleChanges}
       />
+
       {/* <button onClick={() => props.setChecked({...props.checked, instruction: !props.checked.instruction})}>Done</button> */}
 
       {/* <button onClick={() => props.setInProp({...props.inProp, instruction: !props.inProp.instruction})}>Done</button> */}
