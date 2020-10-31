@@ -86,27 +86,23 @@ export default function CreateRecipePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // try checked.ingredient && checked.instruction ? 'instruction' : 'ingredient'
-    // const pathValue = checked.recipe ? 'recipes' : (checked.ingredient ? 'ingredients' : 'instructions')
     const path = !checked.ingredient && !checked.instruction ? 'recipes' : (!checked.recipe && !checked.ingredient ? 'instructions' : 'ingredients')
-    // setPost({...post,
-    //   [e.target.name]: ""
-    // })
 
-    //the submit and transition functions are bundled together for the recipe title and source inputs
+    //the submit and transition functionality are coupled for the recipe-input button
     if (post.title) {
+      setRecipeFields({...recipeFields, title: " ", source: " "})
       setChecked({...checked, recipe: !checked.recipe, ingredient: !checked.ingredient});
     } 
+
     axiosWithAuth()
     .post(`/${path}`, post)
     .then(res => {
       console.log(res)
     })
     .catch(err => {
-      console.log('res is not coming back the way we expected')
+      console.log('uh oh', err)
     })
     
-    console.log("submission successfully launched", post, e)
     //clear the object in state for post
     setPost({})
   }
@@ -137,7 +133,7 @@ export default function CreateRecipePage() {
             <form onSubmit={handleSubmit} className={classes.form}>
               <InstructionsInput className={classes.recipe} checked={checked} setChecked={setChecked} handleChanges={handleChanges} directions={recipeFields.directions} time={recipeFields.time} step={recipeFields.step}/>
               <Button type="submit" variant="contained" color="secondary" onClick={() => setRecipeFields({...recipeFields, step: " ", time: " ", directions: " "})} >Add It</Button>
-              <Button onClick={() => (setChecked({...checked, instruction: !checked.instruction}))} variant="contained" color="secondary" >Done</Button>
+              <Button onClick={() => (setChecked({...checked, recipe: !checked.recipe,  instruction: !checked.instruction}))} variant="contained" color="secondary" >Done</Button>
             </form>
           </Paper>
         </Slide>

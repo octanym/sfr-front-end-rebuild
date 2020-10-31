@@ -4,16 +4,18 @@ import CreateRecipePage from './create-recipe-page';
 
 const Dashboard  = () => {
   return (
-    <>
-    <h1>Dashboard</h1>
-      <ul>
-        <li>RecipeCollection</li>
-        <li>CreateRecipe</li>
-      </ul>
-      <div>
-        <CreateRecipePage />
+    <div>
+      <h1>Dashboard</h1>
+      <div style={{'display': 'flex', 'justifyContent': 'spaceAround'}}>
+        <div style={{'height': '30%', 'width': '50%'}}>
+          <h3>Create Recipe:</h3>
+          <CreateRecipePage />
+        </div>
+        <div style={{'height': '30%', 'width': '50%'}}>
+          <h3>Recipe Collection:</h3>
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 
