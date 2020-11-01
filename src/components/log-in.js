@@ -18,8 +18,9 @@ const LogIn = () => {
       .then( res => {
         //set the value of the returned token to a key of 'token' in local storage
         window.localStorage.setItem('token', res.data.token)
-        console.log(res.data.token)
-        history.push()
+        window.localStorage.setItem('users_id', res.data.id)
+        
+        history.push('/dashboard')
       })
       .catch( err => console.log( 'there was an issue retrieving data:', err ))
   //stop default behavior that the click event triggers on the form element

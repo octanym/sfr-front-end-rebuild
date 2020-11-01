@@ -2,12 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import './temp-styles/index.css';
 
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
+
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <ThemeProvider theme={darkTheme}>
+    <Router>
+      <App />
+    </Router>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 
