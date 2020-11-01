@@ -4,8 +4,8 @@ import RecipeCard from '../components/recipe-card';
 
 const RecipeDetails = (props) => {
   return (
-    <Link to="/recipes/{props.recipe.id}">
-      <RecipeCard recipe={props.recipe}/>
+    <Link to={`/recipes/${props.id}`} style={{'textDecoration': 'none'}}>
+      <RecipeCard title={props.title} id={props.id}/>
     </Link>
   )
 }
