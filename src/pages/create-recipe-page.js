@@ -9,6 +9,9 @@ import  IngredientsInput from '../components/ingredients-input';
 import  InstructionsInput from '../components/instructions-input';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: 'auto'
+  },
   form: {
     '& > *': {
       margin: theme.spacing(1),

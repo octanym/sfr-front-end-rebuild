@@ -28,23 +28,24 @@ const RecipeCollection = () => {
 
   const classes = useStyles();
 
-  const [recipes, setRecipes] = useState([])
+  const [recipes, setRecipes] = useState([{title: 'pizza', id: 1}, {title: 'caprese', id: 2}, {title: 'paella', id: 3}, {title: 'quiche', id: 4}, {title: 'croissant', id: 5}])
 
-  useEffect(() => {
-    axiosWithAuth()
-    .get(`/auth/${id()}/recipes`)
-    .then(res => setRecipes(res.data))
-    .catch(err => console.log(err))
-  }, [])
+  
 
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //   .get(`/auth/${id()}/recipes`)
+  //   .then(res => setRecipes(res.data))
+  //   .catch(err => console.log(err))
+  // }, [])
+
+  console.log(recipes)
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={2.5}>
-        <GridListTile>
-          {recipes.map(recipe => (
-            <RecipeDetails title={recipe.title} id={recipe.id}/>
-          ))}
-        </GridListTile>
+        {recipes.map((recipe, index) => (
+          <RecipeDetails title={recipe.title} id={recipe.id} key={index}/>
+        ))}
       </GridList>
     </div>
   )
