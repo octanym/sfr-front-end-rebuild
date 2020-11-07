@@ -9,6 +9,9 @@ import  IngredientsInput from '../components/ingredients-input';
 import  InstructionsInput from '../components/instructions-input';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: 'auto'
+  },
   form: {
     '& > *': {
       margin: theme.spacing(1),
@@ -49,13 +52,13 @@ const id = () => {
   return JSON.parse(window.localStorage.getItem('users_id'))
 }
 
-export default function CreateRecipePage() {
+export default function CreateRecipePage(props) {
 
   const classes = useStyles();
 
   const [checked, setChecked] = useState({recipe: true, ingredient: false, instruction: false})
 
-  const [post, setPost] = useState({})
+  // const [post, setPost] = useState({})
   
   const [recipeFields, setRecipeFields] = useState({
     title: "",
@@ -69,19 +72,16 @@ export default function CreateRecipePage() {
   })
   
   const handleChanges = (e) => {
-    setRecipeFields({...recipeFields,
-      [e.target.name]: e.target.value
-    })
-    recipeFields[e.target.name] === recipeFields.title
-    ?
-    setPost({...post,
-      title: e.target.value,
-      users_id: recipeFields.users_id
-    })
-    :
-    setPost({...post,
-      [e.target.name] : e.target.value
-    })
+      setRecipeFields({...recipeFields,
+        [e.target.name]: e.target.value
+      })
+
+      e.target.name === 'title' ? props.setPost({...props.post,
+        title: e.target.value,
+        users_id: recipeFields.users_id
+      }) : props.setPost({...props.post,
+        [e.target.name] : e.target.value
+      });
   }
 
   const handleSubmit = (e) => {
@@ -89,13 +89,13 @@ export default function CreateRecipePage() {
     const path = !checked.ingredient && !checked.instruction ? 'recipes' : (!checked.recipe && !checked.ingredient ? 'instructions' : 'ingredients')
 
     //the submit and transition functionality are coupled for the recipe-input button
-    if (post.title) {
+    if (props.post.title) {
       setRecipeFields({...recipeFields, title: " ", source: " "})
       setChecked({...checked, recipe: !checked.recipe, ingredient: !checked.ingredient});
     } 
 
     axiosWithAuth()
-    .post(`/${path}`, post)
+    .post(`/${path}`, props.post)
     .then(res => {
       console.log(res)
     })
@@ -104,7 +104,8 @@ export default function CreateRecipePage() {
     })
     
     //clear the object in state for post
-    setPost({})
+    console.log(checked, props.post, props.post.title)
+    props.setPost({})
   }
 
   return (
