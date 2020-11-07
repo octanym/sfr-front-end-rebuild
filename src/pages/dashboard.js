@@ -9,6 +9,8 @@ const id = () => {
 
 const Dashboard  = () => {
 
+  const [post, setPost] = useState({})
+
   const [recipes, setRecipes] = useState([{title: 'pizza', id: 1}, {title: 'caprese', id: 2}, {title: 'paella', id: 3}, {title: 'quiche', id: 4}, {title: 'croissant', id: 5}])
 
   useEffect(() => {
@@ -16,7 +18,7 @@ const Dashboard  = () => {
     .get(`/auth/${id()}/recipes`)
     .then(res => setRecipes(res.data))
     .catch(err => console.log(err))
-  }, [])
+  }, [post])
 
   return (
     <div style={{'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center', 'width': '80%', 'margin': '5% auto'}}>
@@ -24,7 +26,7 @@ const Dashboard  = () => {
       <div style={{'display': 'flex',  'flexDirection': 'column', 'alignItems': 'center'}}>
         <div style={{'height': '15rem', 'width': '50%', 'margin': 'auto'}}>
             <h3 >Create Recipe:</h3>
-            <CreateRecipePage />
+            <CreateRecipePage post={post} setPost={setPost}/>
         </div>
         <div style={{'height': '15rem', 'width': '80%'}}>
           <h3>Recipe Collection:</h3>
