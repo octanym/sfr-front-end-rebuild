@@ -72,19 +72,16 @@ export default function CreateRecipePage() {
   })
   
   const handleChanges = (e) => {
-    setRecipeFields({...recipeFields,
-      [e.target.name]: e.target.value
-    })
-    recipeFields[e.target.name] === recipeFields.title
-    ?
-    setPost({...post,
-      title: e.target.value,
-      users_id: recipeFields.users_id
-    })
-    :
-    setPost({...post,
-      [e.target.name] : e.target.value
-    })
+      setRecipeFields({...recipeFields,
+        [e.target.name]: e.target.value
+      })
+
+      e.target.name === recipeFields.title ? setPost({...post,
+        title: e.target.value,
+        users_id: recipeFields.users_id
+      }) : setPost({...post,
+        [e.target.name] : e.target.value
+      });
   }
 
   const handleSubmit = (e) => {
@@ -107,6 +104,7 @@ export default function CreateRecipePage() {
     })
     
     //clear the object in state for post
+    console.log(checked, post, post.title)
     setPost({})
   }
 

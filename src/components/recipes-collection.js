@@ -30,14 +30,12 @@ const RecipeCollection = () => {
 
   const [recipes, setRecipes] = useState([{title: 'pizza', id: 1}, {title: 'caprese', id: 2}, {title: 'paella', id: 3}, {title: 'quiche', id: 4}, {title: 'croissant', id: 5}])
 
-  
-
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //   .get(`/auth/${id()}/recipes`)
-  //   .then(res => setRecipes(res.data))
-  //   .catch(err => console.log(err))
-  // }, [])
+  useEffect(() => {
+    axiosWithAuth()
+    .get(`/auth/${id()}/recipes`)
+    .then(res => setRecipes(res.data))
+    .catch(err => console.log(err))
+  }, [])
 
   console.log(recipes)
   return (
