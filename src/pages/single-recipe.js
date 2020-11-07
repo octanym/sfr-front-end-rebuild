@@ -6,6 +6,7 @@ import DeleteRecipe from '../components/delete-recipe';
 const SingleRecipe = () => {
   return (
     <>
+      <h3>Single Recipe View</h3>
     </>
   )
 }
