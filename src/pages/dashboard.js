@@ -11,7 +11,7 @@ const Dashboard  = () => {
 
   const [post, setPost] = useState({})
 
-  const [recipes, setRecipes] = useState([{title: 'pizza', id: 1}, {title: 'caprese', id: 2}, {title: 'paella', id: 3}, {title: 'quiche', id: 4}, {title: 'croissant', id: 5}])
+  const [recipes, setRecipes] = useState([{title: ' ', id: 1}, {title: ' ', id: 2}, {title: ' ', id: 3}, {title: ' ', id: 4}, {title: ' ', id: 5}])
 
   useEffect(() => {
     axiosWithAuth()

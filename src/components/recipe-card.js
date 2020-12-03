@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const RecipeCard = (props) => {
   const classes = useStyles();
 
-  return(
+  return props.source ? (
     <>
       <Card className={classes.root}>
         <CardHeader
@@ -59,17 +59,34 @@ const RecipeCard = (props) => {
             </IconButton>
           }
           title={props.title}
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          image=""
-          title="Paella dish"
+          subheader={props.source}
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          <Typography gutterBottom variant="h5" component="h2">
+            Ingredients
+            {props.ingredients.map((ing) => (
+              <>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {ing.ingredient}, {ing.quantity}
+                </Typography>
+              </>
+            ))}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="h2">
+            Directions
+            {props.instructions.map((inst) => (
+              <>
+                <Typography variant="h5" component="h2">
+                  {inst.step} 
+                </Typography>
+                <Typography variant="body1" component="h3">
+                  {inst.time}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {inst.directions}
+                </Typography>
+              </>
+            ))}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -86,6 +103,47 @@ const RecipeCard = (props) => {
         </CardActions>
       </Card>
     </>
+  ):(
+    <>
+    <Card className={classes.root}>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={classes.avatar}>
+            R
+          </Avatar>
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title={props.title}
+      />
+      <CardMedia
+        className={classes.media}
+        image=""
+        title="Paella dish"
+      />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            This impressive paella is a perfect party dish and a fun meal to cook together with your
+            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          </Typography>
+        </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+        <IconButton
+          aria-label="show more"
+        >
+        </IconButton>
+      </CardActions>
+    </Card>
+  </>
   )
 }
 
