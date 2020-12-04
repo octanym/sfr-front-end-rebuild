@@ -21,14 +21,16 @@ const Dashboard  = () => {
   }, [post])
 
   return (
-    <div style={{'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center', 'width': '80%', 'margin': '5% auto'}}>
-      <h1>Dashboard</h1>
-      <div style={{'display': 'flex',  'flexDirection': 'column', 'alignItems': 'center'}}>
-        <div style={{'height': '15rem', 'width': '50%', 'margin': 'auto'}}>
+    <div>
+      <div style={{'position': 'absolute', top: '0px', 'height': '150px', 'width': '100%'}}>
+        <h1>Dashboard</h1>
+      </div>
+      <div>
+        <div style={{'height': '15rem', 'width': '50%', 'margin': '120px'}}>
             <h3 >Create Recipe:</h3>
             <CreateRecipePage post={post} setPost={setPost}/>
         </div>
-        <div style={{'height': '15rem', 'width': '80%'}}>
+        <div style={{'height': '15rem', 'width': '80%', 'margin': '5% auto'}}>
           <h3>Recipe Collection:</h3>
           <RecipeCollection recipes={recipes} />
         </div>

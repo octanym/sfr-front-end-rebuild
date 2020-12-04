@@ -10,7 +10,7 @@ import  InstructionsInput from '../components/instructions-input';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: 'auto'
+    margin: '0'
   },
   form: {
     '& > *': {
@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
-    margin: '5% auto',
   },
   wrapper: {
     width: 100 + theme.spacing(2),
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   recipe: {
-    width: 300,
+    width: 500,
     height: 300,
   },
 }));
@@ -60,6 +59,7 @@ export default function CreateRecipePage(props) {
 
   // const [post, setPost] = useState({})
   
+  //this tracks the state of the entire recipe that we are currently engaged in creating
   const [recipeFields, setRecipeFields] = useState({
     title: "",
     users_id: id(),
